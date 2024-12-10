@@ -5,23 +5,29 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-    <!-- Notyf Library CSS  -->
+  <meta name="author" content="Adebayo Muis, Charmingdc">
+  <meta name="description" content="The fastest way to generate Qr codes">
+
+  <!-- Notyf Library CSS  -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 
   <!-- Notyf Library JS -->
   <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
-  
-      <!-- custom CSS -->
+
+  <!-- scrollJS Library cdn link -->
+  <script src="https://cdn.jsdelivr.net/gh/Charmingdc/ScrollJs@main/scroll.min.js"></script>
+
+  <!-- custom CSS -->
   <link rel="stylesheet" href="./style.css">
-  
-  <script src="//unpkg.com/systemjs@0.19.47/dist/system.js"></script
+
+  <script src="//unpkg.com/systemjs@0.19.47/dist/system.js">
+    </script
   <title> SwiftScan - Quick Qrcode </title>
-</head>
-<body>
+ </head>
+ <body>
   <header>
     <nav>
-      <ul>
+      <ul class="fadein-up">
         <li>
           <h2> SwiftScan </h2>
         </li>
@@ -36,33 +42,37 @@
   </header>
 
 
-  <main>
-    <section id="intro">
-      <h1 id="website-name">
+      <
+      main >
+      <section id="intro">
+      <h1 class="fadein-up" id="website-name">
         SwiftScan
       </h1>
 
-      <p>
+      <p class="fadein-up">
         Discover the fastest ⚡ way to generate QR code
       </p>
 
-      <div id="divider"></div>
+      <div class="fadein-up" id="divider"></div>
     </section>
 
 
-    <section id="create-qrcode-wrapper">
-      <h3> Configure QR code </h3>
+      <
+      section id = "create-qrcode-wrapper" >
+      <h3 class="fadein-up"> Configure QR code </h3>
 
-      <div class="data-types-box">
-        <label>
+      <
+      div class = "data-types-box" >
+      <label>
           <input type="radio" name="data-type" value="text" checked>
           <span>
             Any Text
           </span>
         </label>
 
-        <label>
-          <input type="radio" name="data-type" value="url">
+      <
+      label >
+      <input type="radio" name="data-type" value="url">
           <span>
             Url
           </span>
@@ -84,31 +94,36 @@
       </div>
 
 
-      <div id="data-type-picker">
+      <div class="fadein-up" id="data-type-picker">
         <p id="current-data-type"> 
           Data type: Any text
         </p>
       </div>
 
 
-      <input type="text" name="" id="data-input" placeholder="Enter your data value">
+      <input type="text" name="data input" class="fadein-up" id="data-input" placeholder="Enter your data value">
 
 
-      <button id="generate-button">
-        Generate QR code
+      <button class="fadein-up" id="generate-button">
+        Generate Qr code
       </button>
     </section>
 
 
     <section id="qrcode-wrapper">
       <div>
-       <img src="" id="qrcode-img"> 
+       <img src="" id="qrcode-img" alt="SwiftScan Qrcode"> 
       </div>
+      
+      <a href="#" class="btn" id="download-btn" download="Qrcode.png">
+        Download Qr code
+      </a>
     </section>
   </main>
 
   
-  <script src="../config.js" type="module"></script>
-</body>
+  <script src="../config.js" type="module">
+  </script>
+  </body>
 
 </html>

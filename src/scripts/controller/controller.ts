@@ -19,14 +19,28 @@ const githubLink = getElement < HTMLElement > ('github-link', 'id');
 const dataTypesBox = getElement < HTMLDivElement > ('data-types-box', 'class');
 const dataTypePicker = getElement < HTMLDivElement > ('data-type-picker', 'id');
 const currentDataType = getElement < HTMLParagraphElement > ('current-data-type', 'id');
-  const dataInput = getElement < HTMLInputElement > ('data-input', 'id');
+const dataInput = getElement < HTMLInputElement > ('data-input', 'id');
 const generateBtn = getElement < HTMLButtonElement > ('generate-button', 'id');
-
+const fadeInUp = document.querySelectorAll('.fadein-up');
 
 
 
 
 export const initController = async (): void => {
+
+  const handleAnimation = async (): void => {
+    try {
+      // initialize ScrollJs 
+      const observer = new ScrollObserver()
+
+      // add fadeInUp animations
+      observer.observe(fadeInUp, null, 'fadein-up-anim');
+    } catch (err) {
+      console.error('Error while setting up animations:', err.message);
+    }
+  }
+  handleAnimation();
+
 
   const displayCurrentDataTpye = async (): void => {
     const dataType = await getSelectedDataType();
@@ -39,37 +53,36 @@ export const initController = async (): void => {
   const handleQrcode = async (): void => {
     try {
       // show loading
-      showLoader(true, generateBtn); 
-      
+      await showLoader(true, generateBtn);
+
       // get data type
       const dataType: string = await getSelectedDataType();
-      
+
       // get data value 
       const data: string | number = dataInput.value;
-      
+
       // check if data value is an empty string 
       if (data === '') {
         notify.error('Please input a value')
-        showLoader(false, generateBtn);
+        await showLoader(false, generateBtn);
         return;
       };
-      
+
       // generate qr code url
       const qrUrl: string = await generateQrUrl(dataType, data);
-      
-      // stop loading effect 
-      showLoader(false, generateBtn);
-      
+
       // render qr code
       await renderQrCode(qrUrl);
-      
+
+      // stop loading effect 
+      await showLoader(false, generateBtn);
+
       // reset all Inputs text
       await resetInputs(currentDataType, dataInput);
     } catch (err) {
       console.log('Failed to create qrcode:', err.message);
     } finally {
-      generateBtn.classList.remove('disbaled');
-      generateBtn.removeAttribut('disabled')
+      await showLoader(false, generateBtn)
     }
   }
 
