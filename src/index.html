@@ -5,12 +5,18 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <!-- Notyf Library CSS  -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 
+  <!-- Notyf Library JS -->
+  <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+  
+      <!-- custom CSS -->
   <link rel="stylesheet" href="./style.css">
-
+  
+  <script src="//unpkg.com/systemjs@0.19.47/dist/system.js"></script
   <title> SwiftScan - Quick Qrcode </title>
-
-  <script src="//unpkg.com/systemjs@0.19.47/dist/system.js"></script>
 </head>
 <body>
   <header>
@@ -79,19 +85,21 @@
 
 
       <div id="data-type-picker">
-        <p> Select your data type </p>
+        <p id="current-data-type"> 
+          Data type: Any text
+        </p>
       </div>
 
 
       <input type="text" name="" id="data-input" placeholder="Enter your data value">
 
 
-      <button id="generate-button" disabled>
+      <button id="generate-button">
         Generate QR code
       </button>
     </section>
 
-
+<!--
     <section id="qrcode-wrapper">
       <div>
        <img src=""> 
@@ -101,18 +109,11 @@
         Download Qr code
       </button>
     </section>
+-->
   </main>
 
-
-  <footer>
-    <p>
-      Created with '♥️' by <a href=""> Adebayo Muis <br> 
-      < Charmingdc /> </a>
-    </p>
-  </footer>
   
-  
-  <script src="../config.js"></script>
+  <script src="../config.js" type="module"></script>
 </body>
 
 </html>
