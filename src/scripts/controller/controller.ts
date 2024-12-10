@@ -12,6 +12,8 @@ import { resetInputs } from '../view/resetInputs.ts';
 // model
 import { getSelectedDataType } from '../model/getSelectedDataType.ts';
 import { generateQrUrl } from '../model/generateQrUrl.ts';
+import { validateInputs } from '../model/validateInputs.ts';
+
 
 
 // getting dom elements 
@@ -26,12 +28,13 @@ const fadeInUp = document.querySelectorAll('.fadein-up');
 
 
 
+
 export const initController = async (): void => {
 
   const handleAnimation = async (): void => {
     try {
       // initialize ScrollJs 
-      const observer = new ScrollObserver()
+      const observer = new ScrollObserver(true)
 
       // add fadeInUp animations
       observer.observe(fadeInUp, null, 'fadein-up-anim');
@@ -51,6 +54,12 @@ export const initController = async (): void => {
 
 
   const handleQrcode = async (): void => {
+    interface ValidationResult {
+      isValid: boolean;
+      errTxt: string;
+    }
+    
+    
     try {
       // show loading
       await showLoader(true, generateBtn);
@@ -61,12 +70,15 @@ export const initController = async (): void => {
       // get data value 
       const data: string | number = dataInput.value;
 
-      // check if data value is an empty string 
-      if (data === '') {
-        notify.error('Please input a value')
+
+      const { isValid, errTxt }: ValidationResult = await validateInputs(dataType, data);
+
+
+      if (isValid === false) {
+        notify.error(`${errTxt}`);
         await showLoader(false, generateBtn);
         return;
-      };
+      }
 
       // generate qr code url
       const qrUrl: string = await generateQrUrl(dataType, data);
@@ -79,6 +91,9 @@ export const initController = async (): void => {
 
       // reset all Inputs text
       await resetInputs(currentDataType, dataInput);
+      
+      // update current data type
+      await displayCurrentDataTpye();
     } catch (err) {
       console.log('Failed to create qrcode:', err.message);
     } finally {
