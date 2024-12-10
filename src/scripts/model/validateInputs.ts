@@ -23,14 +23,14 @@ export const validateInputs = async (dataType: string, data: any): Promise<Valid
         isValid: regex.test(data),
         errTxt: 'Invalid url',
       }
-    } else if (dataType === 'MAILTO') {
+    } else if (dataType === 'mailto') {
       const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
       return {
         isValid: regex.test(data),
         errTxt: 'Invalid email address'
       }
-    } else if (dataType === 'TEL') {
+    } else if (dataType === 'tel') {
       const num = Number(data);
       const isValid = typeof num === 'number' && !isNaN(num);
       

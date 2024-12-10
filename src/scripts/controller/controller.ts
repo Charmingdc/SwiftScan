@@ -68,7 +68,7 @@ export const initController = async (): void => {
       const dataType: string = await getSelectedDataType();
 
       // get data value 
-      const data: string | number = dataInput.value;
+      const data: string | number = dataInput.value.trim();
 
 
       const { isValid, errTxt }: ValidationResult = await validateInputs(dataType, data);

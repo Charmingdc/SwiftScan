@@ -14,11 +14,11 @@ export const generateQrUrl = async (dataType: string, data: string | number): st
 
       return `${baseUrl}?d=${encodeURIComponent(data)}&addtext=${tag}&qrsize=${qrSize}&t=${type}&e=${errorCorrection}`;
 
-    } else if (dataType === 'TEL') {
+    } else if (dataType === 'tel') {
 
       return `${baseUrl}?d=${dataType}:${encodeURIComponent(data)}&addtext=${tag}&qrsize=${qrSize}&t=${type}&e=${errorCorrection}`;
 
-    } else if (dataType === 'MAILTO') {
+    } else if (dataType === 'mailto') {
 
       return `${baseUrl}?d=${dataType}:${encodeURIComponent(data)}&addtext=${tag}&qrsize=${qrSize}&t=${type}&e=${errorCorrection}`;
 
