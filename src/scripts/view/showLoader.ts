@@ -10,6 +10,6 @@ export const showLoader = (status: boolean, button: HTMLButtonElement) => {
   } else if (!status) {
     button.innerHTML = 'Generate Qr code';
     button.classList.remove('disbaled');
-    button.removeAttribut('disabled')
+    button.removeAttribute('disabled')
   }
 };

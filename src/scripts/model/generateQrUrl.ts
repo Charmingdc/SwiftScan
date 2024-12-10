@@ -3,24 +3,24 @@
 
 export const generateQrUrl = async (dataType: string, data: string | number): string => {
   try {
-    const baseUrl: string = 'https://www.qrickit.com/qrickit_apps/qrickit_api.php';
+    const baseUrl: string = 'https://qrickit.com/api/qr.php';
     const tag: string = 'SwiftScan';
-    const qrSize: number = 150;
+    const qrSize: number = 280;
     const type: string = 'png';
     const errorCorrection: string = 'q';
 
 
     if (dataType === 'text' || dataType === 'url') {
 
-      return `${baseUrl}?d=${data}&addText=${tag}&qrsize=${qrSize}&t=${type}&e=${errorCorrection}`;
+      return `${baseUrl}?d=${data}&addtext=${tag}&qrsize=${qrSize}&t=${type}&e=${errorCorrection}`;
 
     } else if (dataType === 'TEL') {
 
-      return `${baseUrl}?d=${dataType}:${data}&addText=${tag}&qrsize=${qrSize}&t=${type}&e=${errorCorrection}`;
+      return `${baseUrl}?d=${dataType}:${data}&addtext=${tag}&qrsize=${qrSize}&t=${type}&e=${errorCorrection}`;
 
     } else if (dataType === 'MAILTO') {
 
-      return `${baseUrl}?d=${dataType}:${data}&addText=${tag}&qrsize=${qrSize}&t=${type}&e=${errorCorrection}`;
+      return `${baseUrl}?d=${dataType}:${data}&addtext=${tag}&qrsize=${qrSize}&t=${type}&e=${errorCorrection}`;
 
     }
   } catch (err) {

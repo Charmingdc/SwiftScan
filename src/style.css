@@ -93,6 +93,10 @@ a:hover {
  color: var(--cl);
 }
 
+.disabled {
+ background: rgba(68, 56, 160, 0.4);
+}
+
 #intro {
   width: 100%;
   display: flex;
@@ -203,7 +207,7 @@ a:hover {
 #qrcode-wrapper {
   width: 100%;
   height: auto;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   padding: .5rem 0;
@@ -226,11 +230,26 @@ a:hover {
 
 #qrcode-wrapper>div {
   width: 90%;
-  height: 18rem;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .5rem 0;
   background: var(--shade);
   border-radius: 1rem;
+  animation: blink 1.5s linear gradient;
   margin: 1rem 0;
 }
 
+#qrcode-wrapper>div>img {
+  border-radius: 0.6rem;
+}
+
+
+@keyframes blink {
+ 50% {
+   background: var(--bg);
+ }
+}
 
 

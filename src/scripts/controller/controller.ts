@@ -5,12 +5,13 @@
 import { getElement } from '../view/getElement.ts';
 import { notify } from '../view/notify.ts';
 import { showLoader } from '../view/showLoader.ts';
+import { renderQrCode } from '../view/renderQrCode.ts';
+import { resetInputs } from '../view/resetInputs.ts';
 
 
 // model
 import { getSelectedDataType } from '../model/getSelectedDataType.ts';
 import { generateQrUrl } from '../model/generateQrUrl.ts';
-import { generateQrCode } from '../model/generateQrUrl.ts';
 
 
 // getting dom elements 
@@ -25,9 +26,9 @@ const generateBtn = getElement < HTMLButtonElement > ('generate-button', 'id');
 
 
 
-export const initController = async () => {
+export const initController = async (): void => {
 
-  const displayCurrentDataTpye = async () => {
+  const displayCurrentDataTpye = async (): void => {
     const dataType = await getSelectedDataType();
     currentDataType.textContent = `Data type: ${dataType}`;
   }
@@ -35,7 +36,7 @@ export const initController = async () => {
 
 
 
-  const handleQrcode = async () => {
+  const handleQrcode = async (): void => {
     try {
       // show loading
       showLoader(true, generateBtn); 
@@ -49,6 +50,7 @@ export const initController = async () => {
       // check if data value is an empty string 
       if (data === '') {
         notify.error('Please input a value')
+        showLoader(false, generateBtn);
         return;
       };
       
@@ -57,11 +59,12 @@ export const initController = async () => {
       
       // stop loading effect 
       showLoader(false, generateBtn);
-      // generate qr code
       
-      console.log(qrUrl);
+      // render qr code
+      await renderQrCode(qrUrl);
       
-      // await generateQrCode(qrUrl);
+      // reset all Inputs text
+      await resetInputs(currentDataType, dataInput);
     } catch (err) {
       console.log('Failed to create qrcode:', err.message);
     } finally {
@@ -72,7 +75,7 @@ export const initController = async () => {
 
 
 
-  const handleEvents = () => {
+  const handleEvents = (): void => {
     // redirect user to SwiftScan repo
     githubLink.addEventListener('click', () => {
       window.location.href = 'https://github.com/Charmingdc/SwiftScan';
