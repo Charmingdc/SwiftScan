@@ -23,27 +23,12 @@ const dataTypePicker = getElement < HTMLDivElement > ('data-type-picker', 'id');
 const currentDataType = getElement < HTMLParagraphElement > ('current-data-type', 'id');
 const dataInput = getElement < HTMLInputElement > ('data-input', 'id');
 const generateBtn = getElement < HTMLButtonElement > ('generate-button', 'id');
-const fadeInUp = document.querySelectorAll('.fadein-up');
 
 
 
 
 
 export const initController = async (): void => {
-
-  const handleAnimation = async (): void => {
-    try {
-      // initialize ScrollJs 
-      const observer = new ScrollObserver(true)
-
-      // add fadeInUp animations
-      observer.observe(fadeInUp, null, 'fadein-up-anim');
-    } catch (err) {
-      console.error('Error while setting up animations:', err.message);
-    }
-  }
-  handleAnimation();
-
 
   const displayCurrentDataTpye = async (): void => {
     const dataType = await getSelectedDataType();
