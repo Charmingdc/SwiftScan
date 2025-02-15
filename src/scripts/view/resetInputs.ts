@@ -1,7 +1,4 @@
-'use strict';
-
-export const resetInputs = (currentDataType: HTMLParamElement, dataInput: HTMLInputElement): void => {
-  
+export const resetInputs = (currentDataType: HTMLParagraphElement, dataInput: HTMLInputElement): void => {
   currentDataType.textContent = 'Data type: Any text';
-  dataInput.value = ''; // reset all inputs
+  dataInput.value = ''; // Reset input field
 };
