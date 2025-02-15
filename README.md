@@ -1,11 +1,11 @@
 
-# SwiftScan
+# SwiftScan ⚡
 
-**SwiftScan** is a minimalistic and open-source QR code generator. Create QR codes effortlessly for email addresses, phone numbers, text, or URLs. SwiftScan is designed to be simple, fast, and accessible to everyone.
+**SwiftScan** is a minimalistic and open-source QR code generator. Create QR codes effortlessly for email addresses, phone numbers, text, or URLs. SwiftScan is designed to be simple, fast, and accessible to everyone. 🚀
 
 ---
 
-## Features
+## Features 🔍
 
 - **Generate QR Codes for Various Data Types:**
   - Email Addresses
@@ -18,7 +18,7 @@
 
 ---
 
-## Installation
+## Installation ✨
 
 Clone the repository or download it directly:
 
@@ -30,7 +30,7 @@ Open the `index.html` file in your browser, and you're ready to go!
 
 ---
 
-## Usage
+## Usage 🚀
 
 ### 1. Clone the Repository
 
@@ -52,7 +52,7 @@ Once the input is provided, a QR code will be generated instantly, and a success
 
 ---
 
-## Development
+## Development ⚒️
 
 Want to contribute? Follow these steps:
 
@@ -73,19 +73,19 @@ Want to contribute? Follow these steps:
 
 ---
 
-## License
+## License 📑
 
 SwiftScan is open-source software licensed under the [MIT License](./LICENSE).
 
 ---
 
-## Contributing
+## Contributing 👥
 
 Contributions are always welcome! Whether it's fixing bugs, improving documentation, or building new features, we appreciate your help.
 
 ---
 
-## Contact
+## Contact ☎️
 
 For issues, feature requests, or discussions, feel free to create an issue in the GitHub repository.
 
