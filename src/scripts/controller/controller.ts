@@ -1,19 +1,19 @@
 'use strict';
 
-// importing helper functions 
-// view
+// Importing helper functions  
+// View  
 import { getElement } from '../view/getElement.ts';
 import { notify } from '../view/notify.ts';
 import { showLoader } from '../view/showLoader.ts';
 import { renderQrCode } from '../view/renderQrCode.ts';
 import { resetInputs } from '../view/resetInputs.ts';
 
-// model
+// Model  
 import { getSelectedDataType } from '../model/getSelectedDataType.ts';
 import { generateQrUrl } from '../model/generateQrUrl.ts';
 import { validateInputs } from '../model/validateInputs.ts';
 
-// getting DOM elements 
+// Getting DOM elements  
 const githubLink = getElement<HTMLElement>('github-link', 'id');
 const dataTypesBox = getElement<HTMLDivElement>('data-types-box', 'class');
 const dataTypePicker = getElement<HTMLDivElement>('data-type-picker', 'id');
@@ -26,6 +26,7 @@ export const initController = async (): Promise<void> => {
     const dataType = await getSelectedDataType();
     if (currentDataType) currentDataType.textContent = `Data type: ${dataType}`;
   };
+
   displayCurrentDataType();
 
   const handleQrcode = async (): Promise<void> => {
@@ -35,16 +36,18 @@ export const initController = async (): Promise<void> => {
     }
 
     try {
-      // Show loading
+      if (!generateBtn || !dataInput) return; // Null check
+
+      // Show loading  
       await showLoader(true, generateBtn);
 
-      // Get data type
+      // Get data type  
       const dataType: string = await getSelectedDataType();
 
-      // Get data value
-      const data: string = dataInput.value.trim(); // Ensures data is always a string
+      // Get data value  
+      const data: string = dataInput.value?.trim() || ''; // Ensures data is always a string
 
-      // Validate inputs
+      // Validate inputs  
       const { isValid, errTxt }: ValidationResult = await validateInputs(dataType, data);
 
       if (!isValid) {
@@ -53,36 +56,38 @@ export const initController = async (): Promise<void> => {
         return;
       }
 
-      // Generate QR code URL
+      // Generate QR code URL  
       const qrUrl: string = await generateQrUrl(dataType, data);
 
-      // Render QR code
+      // Render QR code  
       await renderQrCode(qrUrl);
 
-      // Stop loading effect 
+      // Stop loading effect  
       await showLoader(false, generateBtn);
 
-      // Reset all input fields
-      await resetInputs(currentDataType, dataInput);
+      // Reset all input fields  
+      if (currentDataType && dataInput) {
+        await resetInputs(currentDataType, dataInput);
+      }
 
-      // Update current data type
+      // Update current data type  
       await displayCurrentDataType();
     } catch (err) {
       console.error('Failed to create QR code:', (err as Error).message);
     } finally {
-      await showLoader(false, generateBtn);
+      if (generateBtn) await showLoader(false, generateBtn);
     }
   };
 
   const handleEvents = (): void => {
-    // Redirect user to SwiftScan repo
+    // Redirect user to SwiftScan repo  
     if (githubLink) {
       githubLink.addEventListener('click', () => {
         window.location.href = 'https://github.com/Charmingdc/SwiftScan';
       });
     }
 
-    if (dataTypePicker) {
+    if (dataTypePicker && dataTypesBox) {
       dataTypePicker.addEventListener('click', async () => {
         dataTypesBox.classList.toggle('show');
         await displayCurrentDataType();
