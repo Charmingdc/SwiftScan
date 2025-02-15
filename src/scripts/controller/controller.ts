@@ -8,10 +8,12 @@ import { showLoader } from '../view/showLoader.ts';
 import { renderQrCode } from '../view/renderQrCode.ts';
 import { resetInputs } from '../view/resetInputs.ts';
 
+
 // Model  
 import { getSelectedDataType } from '../model/getSelectedDataType.ts';
 import { generateQrUrl } from '../model/generateQrUrl.ts';
 import { validateInputs } from '../model/validateInputs.ts';
+
 
 // Getting DOM elements  
 const githubLink = getElement<HTMLElement>('github-link', 'id');
@@ -20,6 +22,8 @@ const dataTypePicker = getElement<HTMLDivElement>('data-type-picker', 'id');
 const currentDataType = getElement<HTMLParagraphElement>('current-data-type', 'id');
 const dataInput = getElement<HTMLInputElement>('data-input', 'id');
 const generateBtn = getElement<HTMLButtonElement>('generate-button', 'id');
+
+
 
 export const initController = async (): Promise<void> => {
   const displayCurrentDataType = async (): Promise<void> => {

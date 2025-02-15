@@ -1,5 +1,6 @@
 'use strict';
 
+import { Notyf } from 'notyf';
 
 // functiom for calling custom notfiication
 export const notify = new Notyf({
