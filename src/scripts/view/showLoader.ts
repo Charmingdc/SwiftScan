@@ -1,6 +1,6 @@
 'use strict';
 
-export const showLoader = async (status: boolean, button: HTMLButtonElement): void => {
+export const showLoader = async (status: boolean, button: HTMLButtonElement): Promise<void> => {
   try {
     if (status === true) {
       button.innerHTML = '<div class="loader"></div>';

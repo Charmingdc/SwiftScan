@@ -8,103 +8,93 @@ import { showLoader } from '../view/showLoader.ts';
 import { renderQrCode } from '../view/renderQrCode.ts';
 import { resetInputs } from '../view/resetInputs.ts';
 
-
 // model
 import { getSelectedDataType } from '../model/getSelectedDataType.ts';
 import { generateQrUrl } from '../model/generateQrUrl.ts';
 import { validateInputs } from '../model/validateInputs.ts';
 
+// getting DOM elements 
+const githubLink = getElement<HTMLElement>('github-link', 'id');
+const dataTypesBox = getElement<HTMLDivElement>('data-types-box', 'class');
+const dataTypePicker = getElement<HTMLDivElement>('data-type-picker', 'id');
+const currentDataType = getElement<HTMLParagraphElement>('current-data-type', 'id');
+const dataInput = getElement<HTMLInputElement>('data-input', 'id');
+const generateBtn = getElement<HTMLButtonElement>('generate-button', 'id');
 
-
-// getting dom elements 
-const githubLink = getElement < HTMLElement > ('github-link', 'id');
-const dataTypesBox = getElement < HTMLDivElement > ('data-types-box', 'class');
-const dataTypePicker = getElement < HTMLDivElement > ('data-type-picker', 'id');
-const currentDataType = getElement < HTMLParagraphElement > ('current-data-type', 'id');
-const dataInput = getElement < HTMLInputElement > ('data-input', 'id');
-const generateBtn = getElement < HTMLButtonElement > ('generate-button', 'id');
-
-
-
-
-
-export const initController = async (): void => {
-
-  const displayCurrentDataTpye = async (): void => {
+export const initController = async (): Promise<void> => {
+  const displayCurrentDataType = async (): Promise<void> => {
     const dataType = await getSelectedDataType();
-    currentDataType.textContent = `Data type: ${dataType}`;
-  }
-  displayCurrentDataTpye();
+    if (currentDataType) currentDataType.textContent = `Data type: ${dataType}`;
+  };
+  displayCurrentDataType();
 
-
-
-  const handleQrcode = async (): void => {
+  const handleQrcode = async (): Promise<void> => {
     interface ValidationResult {
       isValid: boolean;
       errTxt: string;
     }
-    
-    
+
     try {
-      // show loading
+      // Show loading
       await showLoader(true, generateBtn);
 
-      // get data type
+      // Get data type
       const dataType: string = await getSelectedDataType();
 
-      // get data value 
-      const data: string | number = dataInput.value.trim();
+      // Get data value
+      const data: string = dataInput.value.trim(); // Ensures data is always a string
 
-
+      // Validate inputs
       const { isValid, errTxt }: ValidationResult = await validateInputs(dataType, data);
 
-
-      if (isValid === false) {
-        notify.error(`${errTxt}`);
+      if (!isValid) {
+        notify.error(errTxt);
         await showLoader(false, generateBtn);
         return;
       }
 
-      // generate qr code url
+      // Generate QR code URL
       const qrUrl: string = await generateQrUrl(dataType, data);
 
-      // render qr code
+      // Render QR code
       await renderQrCode(qrUrl);
 
-      // stop loading effect 
+      // Stop loading effect 
       await showLoader(false, generateBtn);
 
-      // reset all Inputs text
+      // Reset all input fields
       await resetInputs(currentDataType, dataInput);
-      
-      // update current data type
-      await displayCurrentDataTpye();
+
+      // Update current data type
+      await displayCurrentDataType();
     } catch (err) {
-      console.log('Failed to create qrcode:', err.message);
+      console.error('Failed to create QR code:', (err as Error).message);
     } finally {
-      await showLoader(false, generateBtn)
+      await showLoader(false, generateBtn);
     }
-  }
-
-
+  };
 
   const handleEvents = (): void => {
-    // redirect user to SwiftScan repo
-    githubLink.addEventListener('click', () => {
-      window.location.href = 'https://github.com/Charmingdc/SwiftScan';
-    });
+    // Redirect user to SwiftScan repo
+    if (githubLink) {
+      githubLink.addEventListener('click', () => {
+        window.location.href = 'https://github.com/Charmingdc/SwiftScan';
+      });
+    }
 
-    dataTypePicker.addEventListener('click', async () => {
-      dataTypesBox.classList.toggle('show');
-      await displayCurrentDataTpye();
-    });
+    if (dataTypePicker) {
+      dataTypePicker.addEventListener('click', async () => {
+        dataTypesBox.classList.toggle('show');
+        await displayCurrentDataType();
+      });
+    }
 
-    generateBtn.addEventListener('click', async () => {
-      await handleQrcode();
-    });
+    if (generateBtn) {
+      generateBtn.addEventListener('click', async () => {
+        await handleQrcode();
+      });
+    }
+  };
 
-  }
   handleEvents();
-
-
 };

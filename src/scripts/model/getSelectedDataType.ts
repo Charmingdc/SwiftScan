@@ -1,16 +1,18 @@
 'use strict';
 
-export const getSelectedDataType = async (): string => {
+export const getSelectedDataType = async (): Promise<string> => {
   try {
-   const dataOptions = document.getElementsByName('data-type');
+    const dataOptions = document.getElementsByName('data-type') as NodeListOf<HTMLInputElement>;
 
-   for (const option of dataOptions) {
-     if (option.checked) {
-       return option.value;
-     }
-   } 
-   
+    for (const option of dataOptions) {
+      if (option.checked) {
+        return option.value;
+      }
+    }
+
+    throw new Error('No data type selected');
   } catch (err) {
-    console.log('Failed to get selected data type:', err.message);
+    console.error('Failed to get selected data type:', (err as Error).message);
+    return ''; 
   }
 };

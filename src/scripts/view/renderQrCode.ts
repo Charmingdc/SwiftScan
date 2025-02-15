@@ -1,25 +1,22 @@
 'use strict';
 
-
-// import helper function
+// Import helper function
 import { getElement } from './getElement.ts';
 
-
-export const renderQrCode = async (qrUrl: string): void => {
-  const qrCodeWrapper = getElement < HTMLElement > ('qrcode-wrapper', 'id');
-  const img = getElement < HTMLImageElement > ('qrcode-img', 'id');
-  const downloadBtn = getElement < HTMLAnchorElement > ('download-btn', 'id');
-
+export const renderQrCode = async (qrUrl: string): Promise<void> => {
+  const qrCodeWrapper = getElement<HTMLElement>('qrcode-wrapper', 'id');
+  const img = getElement<HTMLImageElement>('qrcode-img', 'id');
+  const downloadBtn = getElement<HTMLAnchorElement>('download-btn', 'id');
 
   try {
-    qrCodeWrapper.style.display = 'flex';
-    
-    // set img src to the qr code url
-    img.src = `${qrUrl}`;
-    
-    // set the download link to the qr code url
-    downloadBtn.href = `${qrUrl}`;
+    if (qrCodeWrapper) qrCodeWrapper.style.display = 'flex';
+
+    // Set img src to the QR code URL
+    if (img) img.src = qrUrl;
+
+    // Set the download link to the QR code URL
+    if (downloadBtn) downloadBtn.href = qrUrl;
   } catch (err) {
-    console.error('Failed to render qr code:', err.mesaage);
+    console.error('Failed to render QR code:', (err as Error).message);
   }
 };

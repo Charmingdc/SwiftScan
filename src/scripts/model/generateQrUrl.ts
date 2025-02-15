@@ -1,7 +1,7 @@
 'use strict';
 
 
-export const generateQrUrl = async (dataType: string, data: string | number): string => {
+export const generateQrUrl = async (dataType: string, data: string | number): Promise<string> => {
   try {
     const baseUrl: string = 'https://qrickit.com/api/qr.php';
     const tag: string = 'SwiftScan';
