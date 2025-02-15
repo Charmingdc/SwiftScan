@@ -12,15 +12,15 @@ export const generateQrUrl = async (dataType: string, data: string | number): st
 
     if (dataType === 'text' || dataType === 'url') {
 
-      return `${baseUrl}?d=${encodeURIComponent(data)}&addtext=${tag}&qrsize=${qrSize}&t=${type}&e=${errorCorrection}`;
+      return `${baseUrl}?d=${encodeURIComponent(data)}&addtext=${tag}&qrsize=${qrSize}&t=${type}&e=${errorCorrection}.${type}`;
 
     } else if (dataType === 'tel') {
 
-      return `${baseUrl}?d=${dataType}:${encodeURIComponent(data)}&addtext=${tag}&qrsize=${qrSize}&t=${type}&e=${errorCorrection}`;
+      return `${baseUrl}?d=${dataType}:${encodeURIComponent(data)}&addtext=${tag}&qrsize=${qrSize}&t=${type}&e=${errorCorrection}.${type}`;
 
     } else if (dataType === 'mailto') {
 
-      return `${baseUrl}?d=${dataType}:${encodeURIComponent(data)}&addtext=${tag}&qrsize=${qrSize}&t=${type}&e=${errorCorrection}`;
+      return `${baseUrl}?d=${dataType}:${encodeURIComponent(data)}&addtext=${tag}&qrsize=${qrSize}&t=${type}&e=${errorCorrection}.${type}`;
 
     }
   } catch (err) {

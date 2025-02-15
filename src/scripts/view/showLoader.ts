@@ -2,7 +2,7 @@
 
 export const showLoader = async (status: boolean, button: HTMLButtonElement): void => {
   try {
-    if (status) {
+    if (status === true) {
       button.innerHTML = '<div class="loader"></div>';
       button.setAttribute('disabled', 'true');
       button.classList.add('disabled');
